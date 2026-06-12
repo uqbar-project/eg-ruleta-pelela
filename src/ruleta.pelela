@@ -7,7 +7,6 @@
       <input id="fecha-input" type="date" bind-value="apuesta.fecha"/>
     </div>
     <Validador prop-errors="apuesta.errors" const-atributo="fecha"></Validador>
-    <span bind-content="apuesta.errors"></span>
 
     <div class="input-group">
       <label for="monto-input">Monto</label>

@@ -1,6 +1,6 @@
 // import { dayjs } from 'dayjs'
 import { Resultado } from './resultado'
-import { ValidationMessage } from './validation-message'
+import type { ValidationMessage } from './validation-message'
 
 export const MONTO_MINIMO_PLENO = 10
 
@@ -58,7 +58,7 @@ export class Apuesta {
   errors: ValidationMessage[] = []
 
   addError(field: string, message: string) {
-    this.errors.push(new ValidationMessage(field, message))
+    this.errors.push({ field, message })
   }
 
   validarApuesta() {

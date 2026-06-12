@@ -1,6 +1,4 @@
-export class ValidationMessage {
-  constructor(
-    public field: string,
-    public message: string,
-  ) {}
+export type ValidationMessage = {
+  field: string
+  message: string
 }
