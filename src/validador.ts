@@ -1,7 +1,12 @@
-import type { ValidationMessage } from './validation-message'
+// type Validable = {
+//   hasErrors(field: string): boolean
+//   errorsFrom(field: string): string[]
+// }
+
+import { ValidationMessage } from "./validation-message"
 
 export class Validador {
-  errors: ValidationMessage[] = []
+  errors!: ValidationMessage[]
   atributo: string = ''
 
   get hayError(): boolean {

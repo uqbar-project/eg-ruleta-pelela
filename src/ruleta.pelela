@@ -6,19 +6,21 @@
       <label for="fecha-input">Fecha</label>
       <input id="fecha-input" type="date" bind-value="apuesta.fecha"/>
     </div>
-    <Validador prop-errors="apuesta.errors" const-atributo="fecha"></Validador>
+    <Validador const-atributo="fecha" prop-errors="apuesta.errors"></Validador>
 
     <div class="input-group">
       <label for="monto-input">Monto</label>
       <input id="monto-input" type="number" bind-value="apuesta.monto"/>
     </div>
+    <Validador const-atributo="monto" prop-errors="apuesta.errors"></Validador>
 
-    <div class="input-group">
+    <!-- <div class="input-group">
       <label for="tipo-apuesta-input">Tipo de apuesta</label>
-      <select id="tipo-apuesta-input" bind-value="tipoApuesta">
+      <select id="tipo-apuesta-input" bind-value="tipoApuestaSeleccionado">
         <option for-each="tipoApuesta of tiposApuesta" bind-content="tipoApuesta.descripcion">
       </select>
     </div>
+    <div if="tipoApuestaError" class="error" bind-content="tipoApuestaError"></div>
 
     <div class="input-group">
       <label for="valor-apostado-input">Valor apostado</label>
@@ -26,6 +28,7 @@
         <option for-each="valor of valoresAApostar" bind-content="valor">
       </select>
     </div>
+    <div if="valorApostadoError" class="error" bind-content="valorApostadoError"></div> -->
     
     <button click="apostar">Apostar</button>
 

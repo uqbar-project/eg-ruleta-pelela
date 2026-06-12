@@ -1,4 +1,4 @@
-// import { dayjs } from 'dayjs'
+// import dayjs from 'dayjs'
 import { Resultado } from './resultado'
 import type { ValidationMessage } from './validation-message'
 
@@ -56,6 +56,17 @@ export class Apuesta {
   valorApostado: number | string | null = null
   resultado: Resultado | null = null
   errors: ValidationMessage[] = []
+
+  hasErrors(field: string): boolean {
+    return this.errors.some((_) => _.field === field)
+  }
+
+  errorsFrom(field: string) {
+    return this.errors
+      .filter((_) => _.field === field)
+      .map((_) => _.message)
+      .join('. ')
+  }
 
   addError(field: string, message: string) {
     this.errors.push({ field, message })
