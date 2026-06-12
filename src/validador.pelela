@@ -1,0 +1,4 @@
+<component view-model="Validador">
+  <div if="hayError" bind-content="mensajeError" class="error">
+  </div>
+</component>
