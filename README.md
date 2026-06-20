@@ -1,6 +1,6 @@
 # 🔄 Conversor Pelela
 
-[![CI](https://github.com/uqbar-project/eg-conversor-millas-pelela/actions/workflows/ci.yml/badge.svg)](https://github.com/uqbar-project/eg-conversor-millas-pelela/actions/workflows/ci.yml)
+[![CI](https://github.com/uqbar-project/eg-ruleta-pelela/actions/workflows/ci.yml/badge.svg)](https://github.com/uqbar-project/eg-ruleta-pelela/actions/workflows/ci.yml) [![codecov](https://codecov.io/gh/uqbar-project/eg-ruleta-pelela/graph/badge.svg?token=gFP3ps41T6)](https://codecov.io/gh/uqbar-project/eg-ruleta-pelela)
 
 ## 🚀 Cómo ejecutarlo
 
