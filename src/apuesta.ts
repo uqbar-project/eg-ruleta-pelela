@@ -1,4 +1,4 @@
-// import dayjs from 'dayjs'
+import dayjs from 'dayjs'
 import { Resultado } from './resultado'
 import type { ValidationMessage } from './validation-message'
 
@@ -52,7 +52,7 @@ export const DOCENA = new Docena()
 export class Apuesta {
   fecha: Date | null = null
   monto = 0
-  tipoApuesta: TipoApuesta | null = null
+  tipoApuesta: TipoApuesta | null = PLENO
   valorApostado: number | string | null = null
   resultado: Resultado | null = null
   errors: ValidationMessage[] = []
@@ -73,16 +73,15 @@ export class Apuesta {
   }
 
   validarApuesta() {
-    //this.errors.length = 0 // TODO: add a helper function
     this.errors = []
     const now = new Date()
     now.setHours(0, 0, 0, 0)
     if (!this.fecha) {
       this.addError('fecha', 'Debe ingresar una fecha de apuesta')
     }
-    // if (dayjs(now).isAfter(dayjs(this.fecha))) {
-    //   this.addError('fecha', 'Debe ingresar una fecha actual o posterior al día de hoy')
-    // }
+    if (dayjs(now).isAfter(dayjs(this.fecha))) {
+      this.addError('fecha', 'Debe ingresar una fecha actual o posterior al día de hoy')
+    }
     if (this.monto <= 0) {
       this.addError('monto', 'El monto a apostar debe ser positivo')
     }
@@ -99,7 +98,6 @@ export class Apuesta {
   apostar() {
     this.resultado = null
     this.validarApuesta()
-    console.info('Errores de validación', this.errors)
     if (this.errors.length > 0) return
     const numeroGanador = this.obtenerNumeroGanador()
     const ganancia = this.calcularGanancia(numeroGanador)
@@ -111,8 +109,8 @@ export class Apuesta {
   }
 
   calcularGanancia(numeroGanador: number) {
-    return this.tipoApuesta?.esGanador(numeroGanador, this.valorApostado)
-      ? this.monto * this.tipoApuesta.ganancia
+    return this.tipoApuesta!.esGanador(numeroGanador, this.valorApostado)
+      ? this.monto * this.tipoApuesta!.ganancia
       : 0
   }
 }

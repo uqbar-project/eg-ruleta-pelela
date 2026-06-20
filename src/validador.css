@@ -1,5 +1,0 @@
-/* Styles for Validador component */
-.error {
-    color: var(--text-color-danger);
-    background-color: var(--bg-color-danger);
-}

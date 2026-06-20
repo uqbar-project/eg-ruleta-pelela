@@ -2,12 +2,12 @@
 
 :root {
   /* Brand Colors */
-  --primary-color: #6a1b9a;
-  --primary-hover: #8e24aa;
+  --primary-color: #2c3e50;
+  --primary-hover: #34495e;
   
   /* Semantic Status Colors */
-  --status-small-bg: #f3e5f5;
-  --status-small-text: #6a1b9a;
+  --status-small-bg: #e3f2fd;
+  --status-small-text: #1565c0;
   --status-big-bg: #f9fbe7;
   --status-big-text: #827717;
 
@@ -18,8 +18,9 @@
   --text-muted: #6c757d;
   --border-color: #dee2e6;
 
-  --bg-color-danger: #721c24;
-  --text-color-danger: #f8d7da;
+  --bg-color-danger: #f5b3b9;
+  --text-color-danger: #4a090f;
+  --border-color-danger: #be4955;
   
   /* Design Tokens */
   --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
@@ -44,4 +45,12 @@ h1 {
   font-size: 1.5rem;
   margin-bottom: 2rem;
   text-align: center;
+}
+
+.error {
+  color: var(--text-color-danger);
+  background-color: var(--bg-color-danger);
+  border: 1px solid var(--border-color-danger);
+  padding: 0.75rem 1rem;
+  margin: 0.05rem 0 0.5rem 0;
 }

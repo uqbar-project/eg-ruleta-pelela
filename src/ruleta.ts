@@ -1,21 +1,18 @@
+import confetti from 'canvas-confetti'
 import { Apuesta, DOCENA, PLENO } from './apuesta'
 
 export class Ruleta {
   tiposApuesta = [PLENO, DOCENA]
-
-  tipoApuestaSeleccionado: string | null = null
-
   apuesta = new Apuesta()
-
-  get valoresAApostar() {
-    const tipoApuestaElegido =
-      this.tiposApuesta.find((tipo) => this.tipoApuestaSeleccionado === tipo.descripcion) ?? null
-    this.apuesta.tipoApuesta = tipoApuestaElegido
-    return tipoApuestaElegido ? tipoApuestaElegido.valoresAApostar : []
-  }
 
   apostar(): void {
     this.apuesta.apostar()
+    if (this.apuesta.resultado?.gano()) {
+      confetti({
+        particleCount: 150,
+        spread: 80,
+        origin: { y: 0.6 },
+      })
+    }
   }
-
 }

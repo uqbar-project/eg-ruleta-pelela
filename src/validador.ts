@@ -1,22 +1,17 @@
-// type Validable = {
-//   hasErrors(field: string): boolean
-//   errorsFrom(field: string): string[]
-// }
-
-import { ValidationMessage } from "./validation-message"
+type Validable = {
+  hasErrors(field: string): boolean
+  errorsFrom(field: string): string[]
+}
 
 export class Validador {
-  errors!: ValidationMessage[]
+  element!: Validable
   atributo: string = ''
 
   get hayError(): boolean {
-    return this.errors.some((_) => _.field === this.atributo)
+    return this.element.hasErrors(this.atributo)
   }
 
   get mensajeError() {
-    return this.errors
-      .filter((_) => _.field === this.atributo)
-      .map((_) => _.message)
-      .join('. ')
+    return this.element.errorsFrom(this.atributo)
   }
 }
