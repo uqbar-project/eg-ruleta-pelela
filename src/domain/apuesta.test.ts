@@ -75,11 +75,6 @@ describe('Apuesta', () => {
     apuestaPleno.validarApuesta()
     expect(apuestaPleno.errorsFrom('monto')).toBe('Debe apostar más de 50 $')
   })
-
-  afterEach(() => {
-    vi.restoreAllMocks()
-  })
-
   it('apuesta pleno gana cuando acierta el número', () => {
     vi.spyOn(Apuesta.prototype, 'obtenerNumeroGanador').mockImplementation(() => 5)
     const apuesta = new Apuesta()
@@ -90,7 +85,6 @@ describe('Apuesta', () => {
     apuesta.apostar()
     expect(apuesta.resultado?.gano()).toBe(true)
   })
-
   it('apuesta pleno pierde cuando no acierta el número', () => {
     vi.spyOn(Apuesta.prototype, 'obtenerNumeroGanador').mockImplementation(() => 5)
     const apuesta = new Apuesta()
@@ -100,5 +94,8 @@ describe('Apuesta', () => {
     apuesta.valorApostado = 3
     apuesta.apostar()
     expect(apuesta.resultado?.gano()).toBe(false)
+  })
+  afterEach(() => {
+    vi.restoreAllMocks()
   })
 })

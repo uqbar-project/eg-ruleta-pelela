@@ -4,109 +4,118 @@
 
 ## 🚀 Cómo ejecutarlo
 
-> **Nota sobre Node.js:** Este proyecto requiere la versión LTS de Node.js especificada en el archivo `.nvmrc` y en el `package.json` (`engines.node`, ej. Node 24). Si tu versión actual es más antigua, te recomendamos ejecutar `nvm use` (o instalar la versión requerida) antes de continuar.
-
-1. **Instalar las dependencias:**
-
-Este proyecto utiliza `pnpm` como gestor de paquetes. Para instalar todo lo necesario, ejecutá:
+Como de costumbre
 
 ```bash
+nvm use
 pnpm install
-```
-
-1. **Levantar el servidor de desarrollo:**
-
-Una vez instaladas las dependencias, arrancá el entorno con:
-
-```bash
 pnpm dev
 ```
 
-1. **Ver la aplicación:**
-
 Abrí tu navegador e ingresá a [http://localhost:5173](http://localhost:5173) para ver la aplicación funcionando en vivo.
 
-## 🔎 El primer ejemplo del binding
+## 🎲 El ejemplo
 
-Tenemos dentro de la carpeta `src` una tríada
+![demo](./images/demo.gif)
 
-- `conversor.pelela`: Es la vista (HTML) donde definimos nuestros componentes visuales y los asociamos mediante el binding con código dinámico
-- `conversor.ts`: Contiene la lógica, el estado y el comportamiento (View-Model).
-- `conversor.css`: Los estilos dedicados para este componente.
+Tenemos una ruleta virtual donde podemos apostar
 
-💡 **Tip:** Podés renombrar estos tres archivos en cualquier momento (usando el CLI: `pelela rename Conversor MiConversor`) y el framework automáticamente tomará los cambios gracias a su registro dinámico.
+- un determinado monto de dinero
+- a que sale un número exacto (pleno) o un número en una docena
+- para una fecha determinada
 
-## Reglas para los archivos
+Esto define un formulario con validaciones y un botón para apostar, donde podemos ganar o perder.
 
-- Las clases de Typescript siguen el formato camelCase (sin espacios, cada palabra comienza con la primera letra en mayúscula)
-- Los archivos .pelela, .ts y .css siguen el formato snake-case (sin espacios, se separa cada palabra con un guión medio)
+## Binding
 
----
+![binding ruleta](./images/binding-ruleta.png)
 
-## 🛠️ Extensiones Recomendadas
+El formulario tiene un binding complejo:
 
-Si utilizás VSCode o similares (Cursor, VSCodium, Windsurf, Antigravity), te recomendamos instalar las siguientes extensiones para aprovechar al máximo el entorno:
+- los inputs fecha y monto están asociados a **apuesta.**fecha y **apuesta.**monto respectivamente. El view model conoce a la apuesta que es un objeto de dominio con comportamiento rico
+- la lista de tipos de apuesta (pleno, docena) la define el view model, pero el binding del select es contra el tipo de apuesta de la apuesta
+- y la lista de valores a apostar depende del tipo de apuesta, por eso un cambio en el tipo de apuesta dispara reactivamente un cambio en el segundo select: `valor of apuesta.tipoApuesta.valoresAApostar`
 
-- **PelelaJS** (`uqbar.pelela-vscode`): Autocompletado, resaltado de sintaxis y diagnóstico para archivos `.pelela`.
-- **Biome** (`biomejs.biome`): Linter y formateador ultrarrápido configurado por defecto en este proyecto.
+El lector podrá pensar: ¿no hay aquí un smell? Hablamos de la Ley de Demeter, y efectivamente, nos pasa que la vista está altamente acoplada con el elemento con el que interactúa. Ésto es algo bastante frecuente a la hora de diseñar interfaces de usuario, y es normal que haya un acoplamiento alto entre estos componentes.
 
----
+## Manejo de errores
 
-## El ejemplo
+Al apostar, tenemos que validar que
 
-- Cuando el usuario escribe el valor en millas, el binding funciona desde la vista hacia el modelo (`bind-value="millas"`), es decir que eso va asignando el valor que se escribe dentro de la variable `millas` de la clase `Conversor`. 
-- Al presionar el botón Convertir, el binding es nuevamente desde la vista hacia el modelo, a través del método `convertir`, que no tiene parámetros. En el binding **no podés usar expresiones, solo llamar a atributos o propiedades (funciones get)**
-- El método convertir produce un cambio en el modelo: la variable `kilometros` se asigna en base al cálculo de conversión
-- Pero eso no es todo, hay tres propiedades que dependen de `kilometros`: `tieneKilometros`, `claseKilometros` y `kilometrosLocale`...
-- ...entonces Pelela las recalcula y el binding va ahora **desde el modelo hacia la vista**, actualizando los elementos del DOM...
-- ...y eso produce que se visualice el div que muestra un label con la conversión en kilómetros con coma decimal y formateado según la clase css correspondiente
+- la fecha exista y sea mayor o igual a la fecha de hoy
+- el monto sea positivo, pero también debe ser mayor al mínimo para la apuesta por pleno/docena
+- debe ingresarse un tipo de apuesta y un valor apostado
 
-### Binding vista a modelo
+Como las excepciones cortan el flujo de envío de mensajes, no vamos a utilizar esta técnica, sino que vamos a recolectar una lista de errores y los vamos a asociar a campos/atributos de nuestro objeto de dominio. Como además trabajamos con binding, no vamos a devolver esa lista sino que lo guardamos dentro del objeto apuesta. Esta decisión está afectada sin dudas por la tecnología de la vista, el dominio no es inocente de esta situación pero es un costo razonable para pagar y además ésto no nos impide hacer un testeo unitario como lo veníamos haciendo anteriormente en materias anteriores.
 
-![Pelela - Binding view-model](./images/binding-pelela-1.png)
+Por otra parte, utilizamos un componente especial para mostrar los errores:
 
-El usuario escribe el valor en millas, en el modelo se asigna sucesivamente:
+- el Validador parametriza el atributo: "fecha", "monto", "tipoApuesta", etc.
+- y muestra el mensaje de error asociado a cada atributo **inmediatamente después** de presentar el control para que el usuario cargue esa información
 
-- atributo millas, valor: 1
-- atributo millas, valor: 10
-- atributo millas, valor: 105
+Eso permite que de un golpe de vista rápido podamos asociar los campos que están bien vs. los que hay que corregir para poder hacer la apuesta correctamente.
 
-### Evento disparado desde la vista
+El lector puede ver la implementación del [componente pelela](./src/validador.pelela) como de [su view model](./src/validador.ts)
 
-![Pelela - Evento desde un botón](./images/binding-pelela-2.png)
+## Strategy tipo de apuesta
 
-El usuario presiona el botón "Convertir", eso se asocia al método convertir() en nuestro view model Conversor. Eso produce cambios dentro de nuestro modelo: el atributo `kilometros` pasa a tener el valor 168.981
+Apuesta tiene un strategy para manejar los tipos de apuesta pleno y docena. Eso permite delegar
 
-### Binding modelo a vista
+- validaciones extra como el monto mínimo necesario para apostar
+- el monto que se gana
+- o si una apuesta resulta ganadora
 
-![Pelela - Binding model-view](./images/binding-pelela-3.png)
+Por otra parte, el select del tipo de apuesta necesita usar los singletons PLENO y DOCENA y no construir nuevos objetos. De lo contrario cuando el usuario seleccione "Docena" si generamos otro objeto Docena lo que nos pasaría es que
 
-Entonces cada una de las "propiedades" de la vista interesadas en kilometros se vuelve a renderizar:
-
-- los kilómetros localizados
-- la clase que define cómo se muestran los kilómetros
-- y el booleano que indica si tenemos kilómetros
-
-> Pelela usa las definiciones de los métodos para entender cuáles son las dependencias: cualquier cambio en kilómetros dispara cambios en `kilometrosLocale`, `claseKilometros` y `tieneKilometros`. Y cualquiera de esos cambios es escuchado por los elementos del DOM de la vista para volverse a mostrar.
-
-![Binding pelela - DOM](./images/binding-pelela.gif)
-
-### Renderizado condicional
-
-La propiedad `tieneKilometros` nos sirve para el renderizado condicional:
-
-- si es true aparecen los kilómetros
-- si es falso **no se muestra**
-
-## Reglas de pelela
-
-- La vista se define en el archivo .pelela, el modelo (viewModel) en el archivo .ts, si hay estilos van en el archivo .css
-- El binding es siempre 1 propiedad de la vista con 1 propiedad de tu modelo. Podríamos extenderlo, pero queremos mantener un mapeo simple
-- No se puede usar expresiones en un archivo .pelela, hay que escribirlas en tu modelo. Ejemplo: no podés escribir
-
-```html
-<div if="kilometros > 0">     ❌ no queremos eso
-<div if="tieneKilometros">    ✅ sí ésto
+```ts
+new Docena() == new Docena()
 ```
 
-- Para definir propiedades usamos el syntactic sugar `get` de Typescript que permite ver un método como una propiedad de una clase. Ejemplo: `get kilometrosLocale() { ... }`
+nos devolvería `false` y en ese caso no veríamos seleccionado ningún valor en el combo/select.
+
+## Apostar
+
+El view model tiene su propio método apostar. Ésto ocurre porque
+
+- por un lado delega en el objeto de dominio `Apuesta` las cuestiones de negocio, como determinar si ganó o perdió, información que queda...
+- ...en el atributo `resultado` que está bindeado a un div
+- pero además queremos mostrar una animación en el caso de haber ganado, y es algo que el objeto Apuesta no debe manejar. Para eso tenemos un componente **confetti** que salta cuando la apuesta nos avisa que ganó.
+
+```ts
+apostar(): void {
+  this.apuesta.apostar()
+  if (this.apuesta.resultado?.gano()) {
+    // manejo de vista
+    confetti({
+      particleCount: 150,
+      spread: 80,
+      origin: { y: 0.6 },
+    })
+  }
+}
+```
+
+## Testeo unitario
+
+Si bien Pelela no trae testeo de front (por una decisión didáctica), este ejemplo muestra cómo podemos cubrir tests de dominio tanto para la [apuesta](./src/domain/apuesta.test.ts) como para el [resultado](./src/domain/resultado.test.ts). En particular pueden mirar cómo se controla el número que sale para ver el mensaje que recibe el usuario:
+
+```ts
+it('apuesta pleno gana cuando acierta el número', () => {
+  vi.spyOn(Apuesta.prototype, 'obtenerNumeroGanador').mockImplementation(() => 5)
+  const apuesta = new Apuesta()
+  apuesta.fecha = new Date()
+  apuesta.monto = 100
+  apuesta.tipoApuesta = PLENO
+  apuesta.valorApostado = 5
+  apuesta.apostar()
+  expect(apuesta.resultado?.gano()).toBe(true)
+})
+```
+
+Para evitar que la definición de un stub pueda afectar otros tests tenemos el método afterEach que vuelve a la apuesta a su definición original (al azar):
+
+```ts
+afterEach(() => {
+  vi.restoreAllMocks()
+})
+```

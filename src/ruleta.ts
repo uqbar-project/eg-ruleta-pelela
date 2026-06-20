@@ -1,5 +1,5 @@
 import confetti from 'canvas-confetti'
-import { Apuesta, DOCENA, PLENO } from './apuesta'
+import { Apuesta, DOCENA, PLENO } from './domain/apuesta'
 
 export class Ruleta {
   tiposApuesta = [PLENO, DOCENA]
