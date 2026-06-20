@@ -32,7 +32,7 @@ Esto define un formulario con validaciones y un botón para apostar, donde podem
 
 El formulario tiene un binding complejo:
 
-- los inputs fecha y monto están asociados a **apuesta.**fecha y **apuesta.**monto respectivamente. El view model conoce a la apuesta que es un objeto de dominio con comportamiento rico
+- los inputs fecha y monto están asociados a `apuesta.fecha` y `apuesta.monto` respectivamente. El view model conoce a la apuesta que es un objeto de dominio con comportamiento rico
 - la lista de tipos de apuesta (pleno, docena) la define el view model, pero el binding del select es contra el tipo de apuesta de la apuesta
 - y la lista de valores a apostar depende del tipo de apuesta, por eso un cambio en el tipo de apuesta dispara reactivamente un cambio en el segundo select: `valor of apuesta.tipoApuesta.valoresAApostar`
 
@@ -54,6 +54,41 @@ Por otra parte, utilizamos un componente especial para mostrar los errores:
 - y muestra el mensaje de error asociado a cada atributo **inmediatamente después** de presentar el control para que el usuario cargue esa información
 
 Eso permite que de un golpe de vista rápido podamos asociar los campos que están bien vs. los que hay que corregir para poder hacer la apuesta correctamente.
+
+Vemos cómo es el pasaje de información del componente padre al hijo, por un lado recibimos **como constante** el nombre del atributo a chequear y por otro el objeto Apuesta:
+
+![binding validador](./images/binding-validador.png)
+
+El validador es un componente reutilizable que podría trabajar con cualquier objeto de dominio que defina
+
+- si un atributo tiene errores (para el renderizado condicional)
+- y qué errores tiene un atributo
+
+De esa manera el validador.pelela usa las dos propiedades que le define el view model, `hayError` y `mensajeError`:
+
+```html
+<component view-model="Validador">
+  <div if="hayError" bind-content="mensajeError" class="error">
+  </div>
+</component>
+```
+
+La implementación de esas propiedades es simple, delega al objeto de dominio:
+
+```ts
+export class Validador {
+  element!: Validable
+  atributo: string = ''
+
+  get hayError(): boolean {
+    return this.element.hasErrors(this.atributo)
+  }
+
+  get mensajeError() {
+    return this.element.errorsFrom(this.atributo)
+  }
+}
+```
 
 El lector puede ver la implementación del [componente pelela](./src/validador.pelela) como de [su view model](./src/validador.ts)
 
