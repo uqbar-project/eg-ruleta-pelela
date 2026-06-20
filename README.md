@@ -28,7 +28,7 @@ Esto define un formulario con validaciones y un botón para apostar, donde podem
 
 ## Binding
 
-![binding ruleta](./images/binding-ruleta.png)
+![binding ruleta](./images/binding-ruleta-ok.png)
 
 El formulario tiene un binding complejo:
 
@@ -57,7 +57,7 @@ Eso permite que de un golpe de vista rápido podamos asociar los campos que est�
 
 Vemos cómo es el pasaje de información del componente padre al hijo, por un lado recibimos **como constante** el nombre del atributo a chequear y por otro el objeto Apuesta:
 
-![binding validador](./images/binding-validador.png)
+![binding validador](./images/binding-validador-ok.png)
 
 El validador es un componente reutilizable que podría trabajar con cualquier objeto de dominio que defina
 
