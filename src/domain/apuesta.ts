@@ -53,7 +53,7 @@ export class Apuesta {
   fecha: Date | null = null
   monto = 0
   tipoApuesta: TipoApuesta | null = PLENO
-  valorApostado: number | string | null = null
+  valorApostado: number | string | null = PLENO.valoresAApostar[0]
   resultado: Resultado | null = null
   errors: ValidationMessage[] = []
 
@@ -98,6 +98,7 @@ export class Apuesta {
   apostar() {
     this.resultado = null
     this.validarApuesta()
+    console.info('errors', this.errors)
     if (this.errors.length > 0) return
     const numeroGanador = this.obtenerNumeroGanador()
     const ganancia = this.calcularGanancia(numeroGanador)

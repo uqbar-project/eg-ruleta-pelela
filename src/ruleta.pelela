@@ -28,7 +28,7 @@
         <option for-each="valor of apuesta.tipoApuesta.valoresAApostar" bind-content="valor"></option>
       </select>
     </div>
-    <Validador const-atributo="valorApostado" prop-element="apuesta"></Validador>
+    <Validador const-atributo="valorAApostar" prop-element="apuesta"></Validador>
 
     <button click="apostar">Apostar</button>
 
