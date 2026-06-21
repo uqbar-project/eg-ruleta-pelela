@@ -48,6 +48,7 @@ describe('Apuesta', () => {
   })
   it('apuesta sin valor apostado tira error', () => {
     const apuestaSinValorApostado = new Apuesta()
+    apuestaSinValorApostado.valorApostado = null
     apuestaSinValorApostado.fecha = new Date()
     apuestaSinValorApostado.monto = 5
     apuestaSinValorApostado.tipoApuesta = PLENO
