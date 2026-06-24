@@ -47,6 +47,7 @@ h1 {
   text-align: center;
 }
 
+/* TODO: pasar a validador.css */
 .error {
   color: var(--text-color-danger);
   background-color: var(--bg-color-danger);

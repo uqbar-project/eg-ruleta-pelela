@@ -15,8 +15,8 @@ importers:
         specifier: ^1.11.21
         version: 1.11.21
       pelelajs:
-        specifier: 1.0.0
-        version: 1.0.0
+        specifier: 1.0.1
+        version: 1.0.1
     devDependencies:
       '@biomejs/biome':
         specifier: 2.3.8
@@ -31,14 +31,14 @@ importers:
         specifier: 5.9.3
         version: 5.9.3
       vite:
-        specifier: 7.3.2
-        version: 7.3.2
+        specifier: 7.3.5
+        version: 7.3.5
       vite-plugin-pelelajs:
-        specifier: 0.7.1
-        version: 0.7.1(vite@7.3.2)
+        specifier: 1.0.1
+        version: 1.0.1(vite@7.3.5)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@vitest/coverage-v8@4.1.9)(vite@7.3.2)
+        version: 4.1.9(@vitest/coverage-v8@4.1.9)(vite@7.3.5)
 
 packages:
 
@@ -594,8 +594,8 @@ packages:
     resolution: {integrity: sha512-hXdUTZYIVOt1Ex//jAQi+wTZZpUpwBj/0QsOzqegb3rGMMeJiSEu5xLHnYfBrRV4RH2+OCSOO95Is/7x1WJ4bw==}
     engines: {node: '>=10'}
 
-  nanoid@3.3.13:
-    resolution: {integrity: sha512-sPdqC6ByMVVGvF1ynvvMo0/o+oD1VX7DaHhijt1bFgjvBkHBib4t49GoNDhf2NDta4oeUNlaGbSt5K7qjZ955Q==}
+  nanoid@3.3.15:
+    resolution: {integrity: sha512-y7Wygv/7mEOvxTuEQDB8StXdMRBWf1kR/tlhAzBRUFkB2jfcLOAxO/SHmOO2zgz1pVgK29/kyupn059/bCHdjA==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
@@ -609,8 +609,8 @@ packages:
   pathe@2.0.3:
     resolution: {integrity: sha512-WUjGcAqP1gQacoQe+OBJsFA7Ld4DyXuUIjZ5cc75cLHvJ7dtNsTugphxIADwspS+AraAUePCKrSVtPLFj/F88w==}
 
-  pelelajs@1.0.0:
-    resolution: {integrity: sha512-slekvfQwXJJIWRfYZPgzhDzLtp+1D5GjMU0SC2quC95pwJKgqd+nFm45U4gP7/3C4lKfZVhdtI26hJlZB6Vc9w==}
+  pelelajs@1.0.1:
+    resolution: {integrity: sha512-RNItz+dZKW44l/Rp7R9jcKWHdemK2A2ZV+Mc8loJVJbWN+kK8dFmBXhEqBdHjHloxUZ9rSilOdKQTeCbif0LUg==}
     hasBin: true
 
   picocolors@1.1.1:
@@ -629,8 +629,8 @@ packages:
     engines: {node: '>=18.0.0', npm: '>=8.0.0'}
     hasBin: true
 
-  semver@7.8.4:
-    resolution: {integrity: sha512-rUCObTnP32Q08R2uuIrt7r9PlEonuTmtuXYcW6s5kjdlj3xbnwe+21yXptAUYcMAABLkYYTtnmzb3w3EDZfueA==}
+  semver@7.8.5:
+    resolution: {integrity: sha512-Y7/KDsb8LjooZpwaqGyulO6DQlksgCncchHGk+sZIY4SBvUocMBEFH5Ur1fI4dV+Jvl0w6cjvucaIi40puRioA==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -677,13 +677,13 @@ packages:
   ul@5.2.16:
     resolution: {integrity: sha512-v1YrSEsJZpJsywzF/MKgsQwMdOwBlwwmNiUOJh/yX6FHrq7dYjeua1YOhLV0q0KioqEFZC4P7MsKmpEsGdZz3w==}
 
-  vite-plugin-pelelajs@0.7.1:
-    resolution: {integrity: sha512-lsslb5BGbC7O/7dR+p/81aQg/XlWkUMHhCHpiBw9wBOfHbEMjMz6/wBFfHlvtCHOzuqfnGE0ywlK+Vd3PHjNkA==}
+  vite-plugin-pelelajs@1.0.1:
+    resolution: {integrity: sha512-5A9s7lxkVQ7TQAG9nSYsoZrdkMk2bCulbRrJFSmRfxxTnV04lmfVwirBBTBThdr2EWuMdCgWxs1tCLtuc7e3wQ==}
     peerDependencies:
       vite: ^7.2.4
 
-  vite@7.3.2:
-    resolution: {integrity: sha512-Bby3NOsna2jsjfLVOHKes8sGwgl4TT0E6vvpYgnAYDIF/tie7MRaFthmKuHx1NSXjiTueXH3do80FMQgvEktRg==}
+  vite@7.3.5:
+    resolution: {integrity: sha512-KuOaNhcnGFN2zIPGA7wRmzF+lJA1sea7rHq17aiJ++9lzY1WWG6Jpwqwe1KNbRVPIqHmr8GLYx7jbrQcN/7/ww==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
@@ -1009,7 +1009,7 @@ snapshots:
       obug: 2.1.3
       std-env: 4.1.0
       tinyrainbow: 3.1.0
-      vitest: 4.1.9(@vitest/coverage-v8@4.1.9)(vite@7.3.2)
+      vitest: 4.1.9(@vitest/coverage-v8@4.1.9)(vite@7.3.5)
 
   '@vitest/expect@4.1.9':
     dependencies:
@@ -1020,13 +1020,13 @@ snapshots:
       chai: 6.2.2
       tinyrainbow: 3.1.0
 
-  '@vitest/mocker@4.1.9(vite@7.3.2)':
+  '@vitest/mocker@4.1.9(vite@7.3.5)':
     dependencies:
       '@vitest/spy': 4.1.9
       estree-walker: 3.0.3
       magic-string: 0.30.21
     optionalDependencies:
-      vite: 7.3.2
+      vite: 7.3.5
 
   '@vitest/pretty-format@4.1.9':
     dependencies:
@@ -1175,9 +1175,9 @@ snapshots:
 
   make-dir@4.0.0:
     dependencies:
-      semver: 7.8.4
+      semver: 7.8.5
 
-  nanoid@3.3.13: {}
+  nanoid@3.3.15: {}
 
   noop6@1.0.10: {}
 
@@ -1185,7 +1185,7 @@ snapshots:
 
   pathe@2.0.3: {}
 
-  pelelajs@1.0.0:
+  pelelajs@1.0.1:
     dependencies:
       chalk: 5.6.2
       cli-box: 6.0.11
@@ -1199,7 +1199,7 @@ snapshots:
 
   postcss@8.5.15:
     dependencies:
-      nanoid: 3.3.13
+      nanoid: 3.3.15
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
@@ -1234,7 +1234,7 @@ snapshots:
       '@rollup/rollup-win32-x64-msvc': 4.62.2
       fsevents: 2.3.3
 
-  semver@7.8.4: {}
+  semver@7.8.5: {}
 
   siginfo@2.0.0: {}
 
@@ -1270,12 +1270,12 @@ snapshots:
       deffy: 2.2.5
       typpy: 2.4.0
 
-  vite-plugin-pelelajs@0.7.1(vite@7.3.2):
+  vite-plugin-pelelajs@1.0.1(vite@7.3.5):
     dependencies:
-      pelelajs: 1.0.0
-      vite: 7.3.2
+      pelelajs: 1.0.1
+      vite: 7.3.5
 
-  vite@7.3.2:
+  vite@7.3.5:
     dependencies:
       esbuild: 0.27.7
       fdir: 6.5.0(picomatch@4.0.4)
@@ -1286,10 +1286,10 @@ snapshots:
     optionalDependencies:
       fsevents: 2.3.3
 
-  vitest@4.1.9(@vitest/coverage-v8@4.1.9)(vite@7.3.2):
+  vitest@4.1.9(@vitest/coverage-v8@4.1.9)(vite@7.3.5):
     dependencies:
       '@vitest/expect': 4.1.9
-      '@vitest/mocker': 4.1.9(vite@7.3.2)
+      '@vitest/mocker': 4.1.9(vite@7.3.5)
       '@vitest/pretty-format': 4.1.9
       '@vitest/runner': 4.1.9
       '@vitest/snapshot': 4.1.9
@@ -1306,7 +1306,7 @@ snapshots:
       tinyexec: 1.2.4
       tinyglobby: 0.2.17
       tinyrainbow: 3.1.0
-      vite: 7.3.2
+      vite: 7.3.5
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@vitest/coverage-v8': 4.1.9(vitest@4.1.9)
