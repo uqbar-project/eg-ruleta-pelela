@@ -15,8 +15,8 @@ importers:
         specifier: ^1.11.21
         version: 1.11.21
       pelelajs:
-        specifier: 1.0.1
-        version: 1.0.1
+        specifier: 1.0.2
+        version: 1.0.2
     devDependencies:
       '@biomejs/biome':
         specifier: 2.3.8
@@ -34,8 +34,8 @@ importers:
         specifier: 7.3.5
         version: 7.3.5
       vite-plugin-pelelajs:
-        specifier: 1.0.1
-        version: 1.0.1(vite@7.3.5)
+        specifier: 1.0.2
+        version: 1.0.2(vite@7.3.5)
       vitest:
         specifier: ^4.1.9
         version: 4.1.9(@vitest/coverage-v8@4.1.9)(vite@7.3.5)
@@ -609,8 +609,8 @@ packages:
   pathe@2.0.3:
     resolution: {integrity: sha512-WUjGcAqP1gQacoQe+OBJsFA7Ld4DyXuUIjZ5cc75cLHvJ7dtNsTugphxIADwspS+AraAUePCKrSVtPLFj/F88w==}
 
-  pelelajs@1.0.1:
-    resolution: {integrity: sha512-RNItz+dZKW44l/Rp7R9jcKWHdemK2A2ZV+Mc8loJVJbWN+kK8dFmBXhEqBdHjHloxUZ9rSilOdKQTeCbif0LUg==}
+  pelelajs@1.0.2:
+    resolution: {integrity: sha512-D67yZ/BJXpAECspyYSWqsFp2G4MhC/2t413InCDt3EqwL+Ab28UK1VbNhkv/d/1HqGcTDzMQniFezABiInPe+Q==}
     hasBin: true
 
   picocolors@1.1.1:
@@ -677,8 +677,8 @@ packages:
   ul@5.2.16:
     resolution: {integrity: sha512-v1YrSEsJZpJsywzF/MKgsQwMdOwBlwwmNiUOJh/yX6FHrq7dYjeua1YOhLV0q0KioqEFZC4P7MsKmpEsGdZz3w==}
 
-  vite-plugin-pelelajs@1.0.1:
-    resolution: {integrity: sha512-5A9s7lxkVQ7TQAG9nSYsoZrdkMk2bCulbRrJFSmRfxxTnV04lmfVwirBBTBThdr2EWuMdCgWxs1tCLtuc7e3wQ==}
+  vite-plugin-pelelajs@1.0.2:
+    resolution: {integrity: sha512-CAKsWRJyc/U7yMay9iX3YKjcvaBsRLvOC/r7EuiBD0sOLMVyxpmsLRPrq4GFBQHFK9SXovEV6i2hCKiK3IaKiQ==}
     peerDependencies:
       vite: ^7.2.4
 
@@ -1185,7 +1185,7 @@ snapshots:
 
   pathe@2.0.3: {}
 
-  pelelajs@1.0.1:
+  pelelajs@1.0.2:
     dependencies:
       chalk: 5.6.2
       cli-box: 6.0.11
@@ -1270,9 +1270,9 @@ snapshots:
       deffy: 2.2.5
       typpy: 2.4.0
 
-  vite-plugin-pelelajs@1.0.1(vite@7.3.5):
+  vite-plugin-pelelajs@1.0.2(vite@7.3.5):
     dependencies:
-      pelelajs: 1.0.1
+      pelelajs: 1.0.2
       vite: 7.3.5
 
   vite@7.3.5:
