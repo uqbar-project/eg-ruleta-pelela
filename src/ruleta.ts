@@ -1,9 +1,10 @@
 import confetti from 'canvas-confetti'
+import type { TipoApuesta } from './domain/apuesta'
 import { Apuesta, DOCENA, PLENO } from './domain/apuesta'
 
 export class Ruleta {
-  tiposApuesta = [PLENO, DOCENA]
-  apuesta = new Apuesta()
+  tiposApuesta: TipoApuesta[] = [PLENO, DOCENA]
+  apuesta: Apuesta = new Apuesta()
 
   apostar(): void {
     this.apuesta.apostar()

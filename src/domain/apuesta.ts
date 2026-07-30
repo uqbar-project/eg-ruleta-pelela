@@ -44,6 +44,7 @@ export type TipoApuesta = {
   validar(apuesta: Apuesta): void
   get ganancia(): number
   get valoresAApostar(): (number | string)[]
+  descripcion: string
 }
 
 export const PLENO = new Pleno()

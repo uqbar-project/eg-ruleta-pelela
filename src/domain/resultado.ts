@@ -11,7 +11,7 @@ export class Resultado {
     return this.montoAGanar > 0
   }
 
-  get valor() {
+  get valor(): string {
     return this.gano()
       ? `¡¡ Ganaste $ ${this.montoAGanar} !!`
       : `¡¡Perdiste!! Salió el ${this.numeroGanador}`
