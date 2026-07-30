@@ -38,6 +38,10 @@ El formulario tiene un binding complejo:
 
 El lector podrá pensar: ¿no hay aquí un smell? Hablamos de la Ley de Demeter, y efectivamente, nos pasa que la vista está altamente acoplada con el elemento con el que interactúa. Ésto es algo bastante frecuente a la hora de diseñar interfaces de usuario, y es normal que haya un acoplamiento alto entre estos componentes.
 
+## Binding anidado
+
+El segundo select (`valorApostado`) itera sobre `apuesta.tipoApuesta.valoresAApostar`, por lo que sus opciones cambian al seleccionar otro tipo de apuesta. Sin embargo, el `valorApostado` del modelo no se actualizaba: al pasar de Pleno a Docena el combo mostraba "Primera", pero `apuesta.valorApostado` seguía siendo `1`. Para resolverlo, `tipoApuesta` dejó de ser un campo directo y pasó a ser un par getter/setter: el setter asigna `valorApostado` al primer valor del nuevo tipo de apuesta. El binding `bind-value="apuesta.tipoApuesta"` funciona igual porque PelelaJS se acopla a la propiedad, sin importar si es un campo o un getter/setter.
+
 ## Manejo de errores
 
 Al apostar, tenemos que validar que

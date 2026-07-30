@@ -53,7 +53,17 @@ export const DOCENA = new Docena()
 export class Apuesta {
   fecha: Date | null = null
   monto = 0
-  tipoApuesta: TipoApuesta | null = PLENO
+  private _tipoApuesta: TipoApuesta | null = PLENO
+
+  get tipoApuesta(): TipoApuesta | null {
+    return this._tipoApuesta
+  }
+
+  set tipoApuesta(value: TipoApuesta | null) {
+    this._tipoApuesta = value
+    this.valorApostado = value?.valoresAApostar[0] ?? null
+  }
+
   valorApostado: number | string | null = PLENO.valoresAApostar[0]
   resultado: Resultado | null = null
   errors: ValidationMessage[] = []
@@ -99,6 +109,7 @@ export class Apuesta {
   apostar() {
     this.resultado = null
     this.validarApuesta()
+    console.info('apuesta', this)
     console.info('errors', this.errors)
     if (this.errors.length > 0) return
     const numeroGanador = this.obtenerNumeroGanador()

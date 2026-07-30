@@ -48,10 +48,10 @@ describe('Apuesta', () => {
   })
   it('apuesta sin valor apostado tira error', () => {
     const apuestaSinValorApostado = new Apuesta()
-    apuestaSinValorApostado.valorApostado = null
     apuestaSinValorApostado.fecha = new Date()
     apuestaSinValorApostado.monto = 5
     apuestaSinValorApostado.tipoApuesta = PLENO
+    apuestaSinValorApostado.valorApostado = null
     apuestaSinValorApostado.validarApuesta()
     expect(apuestaSinValorApostado.hasErrors('valorAApostar')).toBeTruthy()
     expect(apuestaSinValorApostado.errorsFrom('valorAApostar')).toBe(
