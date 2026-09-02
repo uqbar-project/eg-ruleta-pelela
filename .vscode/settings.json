@@ -7,6 +7,5 @@
   },
   "editor.linkedEditing": true,
   "js/ts.preferences.quoteStyle": "single",
-  "js/ts.suggest.autoImports": true,
-
+  "js/ts.suggest.autoImports": true
 }
